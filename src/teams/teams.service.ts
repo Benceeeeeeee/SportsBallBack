@@ -23,18 +23,18 @@ export class TeamsService {
   }
 
   findAll() {
-    return `This action returns all teams`;
+    return this.db.team.findMany();
   }
-
+d
   findOne(id: number) {
-    return `This action returns a #${id} team`;
+    return this.db.team.findUnique({ where: { id } });
   }
 
   update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+    return this.db.team.update({ where: { id }, data: updateTeamDto });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} team`;
+    return this.db.team.delete({ where: { id } });
   }
 }

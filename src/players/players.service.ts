@@ -24,18 +24,18 @@ export class PlayersService {
   }
 
   findAll() {
-    return `This action returns all players`;
+    return this.db.player.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} player`;
+    return this.db.player.findUnique({where: {id}});
   }
 
   update(id: number, updatePlayerDto: UpdatePlayerDto) {
-    return `This action updates a #${id} player`;
+    return this.db.player.update({where: {id}, data: updatePlayerDto});
   }
 
   remove(id: number) {
-    return `This action removes a #${id} player`;
+    return this.db.player.delete({where: {id}});
   }
 }
