@@ -23,11 +23,28 @@ export class TeamsService {
   }
 
   findAll() {
-    return this.db.team.findMany();
+    return this.db.team.findMany({
+      include: {
+        players: true,
+      },
+    });
   }
-d
+
   findOne(id: number) {
-    return this.db.team.findUnique({ where: { id } });
+    return this.db.team.findUnique({ 
+      where: { id },
+      include: {
+        players: true,
+      },
+    });
+  }
+
+  teamsWithPlayers() {
+    return this.db.team.findMany({
+      include: {
+        players: true,
+      },
+    });
   }
 
   update(id: number, updateTeamDto: UpdateTeamDto) {
