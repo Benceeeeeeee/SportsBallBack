@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Injectable()
 export class TeamsService {
+  constructor(private readonly db: PrismaService) {}
+
   create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+    return this.db.team.create({ data: createTeamDto });
+  }
+
+  async addPlayerToTeam(teamId: number, playerId: number) {
+    return this.db.player.update({
+      where: { id: playerId },
+      data: {
+        team: {
+          connect: { id: teamId },
+        },
+      },
+    });
   }
 
   findAll() {
