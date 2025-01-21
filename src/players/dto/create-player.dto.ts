@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import { IsDate, IsNumber, IsString } from "class-validator";
 
 export class CreatePlayerDto {
@@ -7,6 +8,7 @@ export class CreatePlayerDto {
     @IsNumber()
     goalCount: number;
     
+    @Type(() => Date)
     @IsDate()
     birthDate: Date;
 }

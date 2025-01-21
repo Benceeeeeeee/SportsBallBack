@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
-import { PrismaClient } from '@prisma/client';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class PlayersService {
-  constructor(private readonly db: PrismaClient){}
+  constructor(private readonly db: PrismaService){}
 
   create(createPlayerDto: CreatePlayerDto) {
     return this.db.player.create({data: createPlayerDto});
@@ -16,7 +16,7 @@ export class PlayersService {
     return this.db.player.create({
       data: {
         ...createPlayerDto,
-        post: {
+        team: {
           connect: { id: id }
         }
       }

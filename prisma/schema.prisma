@@ -28,4 +28,5 @@ model Team{
   country String
 
   players Player[]
+  @@index([country])
 }
